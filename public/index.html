@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section class="auth-screen" id="authScreen">
+        <div class="auth-copy">
+          <p class="eyebrow">Expense Tracker</p>
+          <h1>Plan every rupee with a simple personal dashboard.</h1>
+          <p class="hero-copy">
+            Register with your phone number and a 4-digit PIN, then manage
+            income, EMIs, expenses, and savings goals in separate tabs.
+          </p>
+        </div>
+
+        <div class="auth-panel">
+          <div class="auth-toggle" id="authToggle">
+            <button class="active" type="button">Login</button>
+            <button type="button">Register</button>
+          </div>
+          <form class="auth-form" id="authForm">
+            <label>
+              <span>Phone number</span>
+              <input
+                name="phone"
+                type="tel"
+                inputmode="numeric"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                placeholder="9876543210"
+                required
+              />
+            </label>
+            <label>
+              <span>4-digit PIN</span>
+              <input
+                name="pin"
+                type="password"
+                inputmode="numeric"
+                pattern="[0-9]{4}"
+                maxlength="4"
+                placeholder="1234"
+                required
+              />
+            </label>
+            <button class="submit-button" type="submit">Login</button>
+          </form>
+          <p class="auth-message" id="authMessage"></p>
+        </div>
+      </section>
+
+      <main class="workspace" id="appScreen" hidden>
+        <header class="hero hero-compact">
+          <div>
+            <p class="eyebrow">Personal Finance Planner</p>
+            <h1 id="welcomeTitle">Welcome back</h1>
+            <p class="hero-copy">
+              Review your monthly financial picture and keep every category up
+              to date.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <span class="user-chip" id="userChip"></span>
+            <button class="logout-button" id="logoutButton" type="button">Logout</button>
+          </div>
+          <div class="month-toolbar">
+            <label class="month-label">
+              <span>Budget month</span>
+              <input id="monthPicker" type="month" />
+            </label>
+            <p class="month-copy">
+              Assign salary to the month you plan to spend it in, so March salary
+              can support April spending.
+            </p>
+          </div>
+          <section class="summary-grid" id="summaryCards"></section>
+        </header>
+
+        <section class="tabs-panel">
+          <div class="tabs" id="tabs"></div>
+          <div class="tab-content" id="tabContent"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="sectionTemplate">
+      <section class="section-card">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker"></p>
+            <h2></h2>
+          </div>
+          <p class="section-description"></p>
+        </div>
+        <div class="section-layout">
+          <form class="data-form"></form>
+          <div class="data-list-wrap">
+            <div class="list-header">
+              <h3></h3>
+              <span class="list-count"></span>
+            </div>
+            <div class="empty-state" hidden>No entries yet.</div>
+            <div class="data-list"></div>
+          </div>
+        </div>
+      </section>
+    </template>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

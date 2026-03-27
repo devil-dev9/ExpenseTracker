@@ -1,0 +1,19 @@
+{
+  "name": "expense-tracker",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server/index.mjs",
+    "start": "node server/index.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node --check server/index.mjs && node --check public/app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^12.4.1",
+    "connect-sqlite3": "^0.9.16",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2"
+  }
+}
