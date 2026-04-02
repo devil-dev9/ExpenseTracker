@@ -14,12 +14,13 @@
   </head>
   <body>
     <div class="app-shell">
-      <section class="auth-screen" id="authScreen">
+      <section class="auth-screen" id="authScreen" hidden>
         <div class="auth-copy">
           <p class="eyebrow">Expense Tracker</p>
           <h1>Plan every rupee with a simple personal dashboard.</h1>
           <p class="hero-copy">
-            Register with your phone number and a 4-digit PIN, then manage
+            Register with your name, email, phone number, and a 6-digit
+            passcode, then manage
             income, EMIs, expenses, and savings goals in separate tabs.
           </p>
         </div>
@@ -43,14 +44,14 @@
               />
             </label>
             <label>
-              <span>4-digit PIN</span>
+              <span>6-digit passcode</span>
               <input
                 name="pin"
                 type="password"
                 inputmode="numeric"
-                pattern="[0-9]{4}"
-                maxlength="4"
-                placeholder="1234"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                placeholder="123456"
                 required
               />
             </label>
@@ -62,7 +63,23 @@
 
       <main class="workspace" id="appScreen" hidden>
         <header class="hero hero-compact">
-          <div>
+          <div class="hero-topbar">
+            <div></div>
+            <div class="hero-actions">
+              <button class="notify-button" id="notifyButton" type="button">
+                Alerts
+                <span class="notify-count" id="notifyCount">0</span>
+              </button>
+              <button class="profile-button" id="profileButton" type="button">
+                <span class="profile-avatar" id="profileAvatar">P</span>
+                <span class="profile-copy">
+                  <strong id="profileNameChip">Profile</strong>
+                  <span>Account</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div id="dashboardIntro">
             <p class="eyebrow">Personal Finance Planner</p>
             <h1 id="welcomeTitle">Welcome back</h1>
             <p class="hero-copy">
@@ -70,28 +87,49 @@
               to date.
             </p>
           </div>
-          <div class="hero-actions">
-            <span class="user-chip" id="userChip"></span>
-            <button class="logout-button" id="logoutButton" type="button">Logout</button>
-          </div>
-          <div class="month-toolbar">
+          <section class="notify-panel" id="notifyPanel" hidden></section>
+          <div class="month-toolbar" id="monthToolbar">
             <label class="month-label">
-              <span>Budget month</span>
+              <span>Spending month</span>
               <input id="monthPicker" type="month" />
             </label>
             <p class="month-copy">
-              Assign salary to the month you plan to spend it in, so March salary
-              can support April spending.
+              Salary received near the end of one month can be planned against the
+              next month for EMI and expenses.
             </p>
           </div>
-          <section class="summary-grid" id="summaryCards"></section>
+          <section class="summary-grid" id="summaryCards" hidden></section>
+          <section class="chart-grid" id="masterCharts"></section>
         </header>
 
-        <section class="tabs-panel">
-          <div class="tabs" id="tabs"></div>
-          <div class="tab-content" id="tabContent"></div>
+        <section class="tabs-panel" id="dashboardView">
+          <div class="section-hub" id="sectionHub"></div>
+          <section class="tabs-panel" id="sectionView" hidden>
+            <div class="list-header">
+              <h2 id="sectionTitle">Section</h2>
+              <button class="ghost-button" id="backToHome" type="button">Back to home</button>
+            </div>
+            <div class="tab-content" id="sectionContent"></div>
+          </section>
+        </section>
+        <section class="tabs-panel" id="accountView" hidden>
+          <div class="list-header">
+            <h2>Account</h2>
+            <button class="ghost-button" id="backToDashboard" type="button">Back to dashboard</button>
+          </div>
+          <div class="tab-content" id="accountPageContent"></div>
         </section>
       </main>
+    </div>
+    <div class="modal-shell" id="modalShell" hidden>
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-card">
+        <div class="list-header">
+          <h3 id="modalTitle">Dialog</h3>
+          <button class="ghost-button" id="modalClose" type="button">Close</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
     </div>
 
     <template id="sectionTemplate">
@@ -116,6 +154,6 @@
         </div>
       </section>
     </template>
-    <script src="./app.js" defer></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

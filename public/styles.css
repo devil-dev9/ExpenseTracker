@@ -28,9 +28,9 @@ body {
 }
 
 .app-shell {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1040px, calc(100% - 24px));
   margin: 0 auto;
-  padding: 32px 0 56px;
+  padding: 20px 0 36px;
 }
 
 .auth-screen {
@@ -47,8 +47,8 @@ body {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
-  border-radius: 28px;
-  padding: 28px;
+  border-radius: 22px;
+  padding: 22px;
 }
 
 .auth-copy {
@@ -72,7 +72,8 @@ body {
 }
 
 .auth-toggle button,
-.logout-button {
+.notify-button,
+.profile-button {
   border: 0;
   cursor: pointer;
   font: inherit;
@@ -103,7 +104,14 @@ body {
 }
 
 .workspace[hidden],
-.auth-screen[hidden] {
+.auth-screen[hidden],
+.notify-panel[hidden],
+#sectionView[hidden],
+#sectionHub[hidden],
+#dashboardIntro[hidden],
+#monthToolbar[hidden],
+#masterCharts[hidden],
+#summaryCards[hidden] {
   display: none;
 }
 
@@ -111,9 +119,17 @@ body {
   margin-bottom: 20px;
 }
 
-.hero-actions {
+.hero-topbar {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: flex-end;
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
@@ -148,17 +164,78 @@ body {
   font-weight: 700;
 }
 
-.logout-button {
+.notify-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   border-radius: 14px;
   padding: 12px 16px;
-  background: rgba(42, 30, 18, 0.92);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+  border: 1px solid rgba(94, 66, 41, 0.14);
+}
+
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 18px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text);
+  border: 1px solid rgba(94, 66, 41, 0.14);
+  text-align: left;
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--teal), #6db8b1);
   color: #fffaf4;
+  font-weight: 700;
+}
+
+.profile-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.profile-copy span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.notify-count {
+  min-width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fffaf4;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.notify-panel {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  width: min(360px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  justify-items: stretch;
+  z-index: 10;
 }
 
 .hero {
   display: grid;
-  gap: 24px;
-  margin-bottom: 28px;
+  gap: 16px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
 .eyebrow,
@@ -182,8 +259,8 @@ button,
 h1 {
   margin: 0;
   max-width: 10ch;
-  font-size: clamp(2.6rem, 6vw, 4.8rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1;
 }
 
 .hero-copy,
@@ -197,8 +274,8 @@ label span {
 
 .hero-copy {
   max-width: 60ch;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 0.94rem;
+  line-height: 1.5;
 }
 
 .summary-grid {
@@ -209,15 +286,16 @@ label span {
 
 .chart-grid {
   display: grid;
-  gap: 16px;
-  margin: 18px 0 22px;
+  gap: 12px;
+  margin: 10px 0 14px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .chart-card {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(94, 66, 41, 0.1);
-  border-radius: 22px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 14px;
 }
 
 .chart-row {
@@ -226,6 +304,11 @@ label span {
   align-items: center;
   gap: 12px;
   padding: 8px 0;
+}
+
+.chart-stack {
+  display: grid;
+  gap: 8px;
 }
 
 .chart-bar {
@@ -239,6 +322,28 @@ label span {
   height: 100%;
   border-radius: inherit;
   background: var(--teal);
+}
+
+.chart-bar-secondary {
+  height: 10px;
+  background: rgba(201, 111, 59, 0.12);
+}
+
+.chart-fill-secondary {
+  background: linear-gradient(90deg, var(--accent), #e8a34a);
+}
+
+.chart-meta {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.chart-value {
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
 }
 
 .summary-card,
@@ -274,15 +379,43 @@ label span {
 }
 
 .tabs-panel {
-  border-radius: 28px;
-  padding: 18px;
+  border-radius: 22px;
+  padding: 14px;
 }
 
-.tabs {
-  display: flex;
+#accountView {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.section-hub {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
+}
+
+.section-link-card {
+  border: 1px solid rgba(94, 66, 41, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font: inherit;
+  color: var(--text);
+}
+
+.section-link-kicker {
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
 }
 
 .tab-button {
@@ -307,8 +440,8 @@ label span {
 }
 
 .section-card {
-  border-radius: 24px;
-  padding: 22px;
+  border-radius: 20px;
+  padding: 16px;
 }
 
 .section-head,
@@ -322,22 +455,25 @@ label span {
 .section-layout {
   display: grid;
   grid-template-columns: minmax(280px, 360px) 1fr;
-  gap: 22px;
-  margin-top: 22px;
+  gap: 16px;
+  margin-top: 14px;
+  align-items: start;
 }
 
 .data-form,
 .entry-card {
   background: var(--panel-strong);
   border: 1px solid rgba(94, 66, 41, 0.1);
-  border-radius: 22px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 14px;
 }
 
 .data-form {
   display: grid;
   gap: 14px;
   align-content: start;
+  position: sticky;
+  top: 12px;
 }
 
 label {
@@ -351,8 +487,8 @@ select,
 textarea {
   width: 100%;
   border: 1px solid rgba(94, 66, 41, 0.16);
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 10px 12px;
   font: inherit;
   color: var(--text);
   background: #fff;
@@ -368,8 +504,8 @@ textarea {
 .ghost-button,
 .secondary-button {
   border: 0;
-  border-radius: 14px;
-  padding: 12px 16px;
+  border-radius: 12px;
+  padding: 10px 14px;
   font: inherit;
   cursor: pointer;
 }
@@ -392,7 +528,51 @@ textarea {
 
 .data-list {
   display: grid;
+  gap: 10px;
+  max-height: 60vh;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.data-list-wrap {
+  min-height: 0;
+}
+
+.account-page {
+  min-height: 70vh;
+}
+
+.account-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.2fr) minmax(280px, 0.8fr);
+  gap: 22px;
+  margin-top: 22px;
+  align-items: start;
+}
+
+.account-main,
+.account-side {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-readout {
+  display: grid;
   gap: 14px;
+  margin-top: 12px;
+}
+
+.profile-readout strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.02rem;
+}
+
+.field-label {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .entry-card {
@@ -409,7 +589,7 @@ textarea {
 
 .entry-title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .amount-pill {
@@ -422,9 +602,9 @@ textarea {
 
 .meta-line {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  font-size: 0.95rem;
+  font-size: 0.84rem;
 }
 
 .entry-actions {
@@ -442,8 +622,60 @@ textarea {
 .sub-card {
   background: rgba(255, 255, 255, 0.74);
   border: 1px solid rgba(94, 66, 41, 0.08);
-  border-radius: 18px;
-  padding: 14px;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.compact-card {
+  padding: 12px;
+}
+
+.pie-card {
+  align-content: start;
+}
+
+.pie-wrap {
+  position: relative;
+  width: 118px;
+  height: 118px;
+  margin: 8px auto 10px;
+}
+
+.pie-chart {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.pie-center {
+  position: absolute;
+  inset: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--panel-strong);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pie-legend {
+  display: grid;
+  gap: 8px;
+}
+
+.pie-legend-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.pie-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
 }
 
 .inline-form {
@@ -494,6 +726,68 @@ textarea {
   border-radius: 18px;
 }
 
+.modal-shell[hidden] {
+  display: none;
+}
+
+.modal-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 18, 10, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  position: relative;
+  width: min(860px, 100%);
+  max-height: min(80vh, 900px);
+  overflow: auto;
+  background: var(--panel-strong);
+  border: 1px solid rgba(94, 66, 41, 0.12);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.modal-body {
+  margin-top: 16px;
+  display: grid;
+  gap: 14px;
+}
+
+.invoice-preview-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.invoice-preview-frame {
+  width: 100%;
+  height: min(78vh, 980px);
+  border: 1px solid rgba(94, 66, 41, 0.12);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.modal-card:has(.invoice-preview-frame) {
+  width: min(1180px, 96vw);
+  max-height: 92vh;
+  padding: 18px;
+}
+
+.modal-card:has(.invoice-preview-frame) .modal-body {
+  margin-top: 12px;
+}
+
 @media (max-width: 860px) {
   .auth-screen {
     grid-template-columns: 1fr;
@@ -504,6 +798,15 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .data-form {
+    position: static;
+  }
+
+  .hero-topbar,
   .section-head,
   .list-header,
   .entry-topline,
@@ -514,5 +817,9 @@ textarea {
 
   .chart-row {
     grid-template-columns: 1fr;
+  }
+
+  .invoice-preview-frame {
+    height: 70vh;
   }
 }
